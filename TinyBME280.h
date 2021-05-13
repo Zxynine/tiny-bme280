@@ -34,4 +34,7 @@ uint32_t BME280pressure();
 // Output value of “4653” represents 46.53 %RH
 uint32_t BME280humidity();
 
+// Altitude in m, resolution is based on multiple factors
+int32_t BME280altitude();
+
 #endif
