@@ -4,6 +4,14 @@
    http://creativecommons.org/licenses/by/4.0/
 */
 
+#define I2C_TIMEOUT 1000
+#define I2C_PULLUP 1
+//SDA pin is connected on D (ATtiny Pin 10) (PA3)
+#define SDA_PORT PORTB
+#define SDA_PIN 1 // = pb1(pin #6)
+//SCL pin is connected on D6 (ATtiny Pin 11) (PA2)
+#define SCL_PORT PORTB
+#define SCL_PIN 4 // = pb4 (pin #3)
 #include "TinyBME280.h"
 
 int16_t T[4], P[10], H[7];
