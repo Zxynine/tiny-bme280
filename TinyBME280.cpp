@@ -133,21 +133,37 @@ float BME280altitude (float referencePressure) {
 
 //Heat index in DegC
 float BME280heatIndex (float T, float R) { //T=referenceTemperature R=referenceHumidity
-   T = (T * 1.8) + 32;
-   float TT = T * T;
-   float RR = R * R
+   T = (T * 1.8) + 32.0; //Converts to F
    
    float HI;
-   HI  = -42.38;
-   HI +=  2.049 * T;
-   HI +=  10.14 * R;
-   HI += -0.2248 * T * R;
-   HI += -0.006838 * TT;
-   HI += -0.05482 * RR;
-   HI +=  0.001228 * TT * R;
-   HI +=  0.0008528 * RR * T;
-   HI += -0.00000199 * TT * RR;
-   return ((HI - 32.0) / 1.8);
+   //Simple formula is computed first and the result averaged with the temperature.
+   HI =(T - 68.0) * 1.2;
+   HI += R * 0.094;
+   HI += T + 61.0;
+   HI *= 0.5;
+   if (HI >= 80) { //If this value is 80 degrees F or higher, the full regression equation is used;
+      float TT = T * T; //Sets up squared
+      float RR = R * R; //Sets up squared
+      HI  = -42.379;
+      HI +=  2.04901523 * T;
+      HI +=  10.14333127 * R;
+      HI += -0.22475541 * T * R;
+      HI += -0.00683783 * TT;
+      HI += -0.05481717 * RR;
+      HI +=  0.00122874 * TT * R;
+      HI +=  0.00085282 * RR * T;
+      HI += -0.00000199 * TT * RR;
+      float adj = 0;
+      if (R < 13.0 && T > 80.0) {
+         adj = sqrt((17.0 - abs(T - 95.0)) / 17.0);
+         adj *= (13.0 - R) / -4.0;
+      } else if (R > 85.0 && T > 80.0 && T < 87.0) {
+         adj = (87.0 - T) / 5;
+         adj *= (R - 85.0) / 10.0;
+      }
+      HI += adj;
+   }
+   return ((HI - 32.0) / 1.8);   //Converts back to C
 }
 
 //Dewpoint in DegC
