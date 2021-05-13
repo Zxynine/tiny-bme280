@@ -5,19 +5,6 @@
 */
 
 #include <stdint.h>
-#include <Arduino.h>
-
-#if !defined(SDA_PIN) && !defined(SCL_PIN) 
-#define I2C_TIMEOUT 1000
-#define I2C_PULLUP 1
-//SDA pin is connected on D (ATtiny Pin 6) (PB1)
-#define SDA_PORT PORTB
-#define SDA_PIN 1
-//SCL pin is connected on D6 (ATtiny Pin 3) (PB4)
-#define SCL_PORT PORTB
-#define SCL_PIN 4
-#endif
-#include <SoftWire.h>
 
 #ifndef TINYBME280
 #define TINYBME280
