@@ -32,11 +32,11 @@ uint32_t BME280pressure();
 uint32_t BME280humidity();
 
 // Altitude in m, resolution is based on multiple factors
-float BME280altitude();
+float BME280altitude(float referencePressure);
 
 // Apparent temperature (Heat index) in DegC
-float BME280heatIndex();
+float BME280heatIndex(float T, float R);
 
 // Dew Point in DegC
-float BME280dewPoint();
+float BME280dewPoint(float T, float R);
 #endif
