@@ -127,31 +127,31 @@ uint32_t BME280humidity () {
 }
 
 // Altitude in metres
-int32_t BME280altitude (float referencePressure) {
+float BME280altitude (float referencePressure) {
   return ((float)-45846.2)*(pow(((float)BME280pressure()/(float)referencePressure), 0.190263) - (float)1);
 }
 
 //Heat index in DegC
-int32_t BME280heatIndex (float T, float R) { //T=referenceTemperature R=referenceHumidity
+float BME280heatIndex (float T, float R) { //T=referenceTemperature R=referenceHumidity
    T = (T * 1.8) + 32;
    float TT = T * T;
    float RR = R * R
    
-   int32_t HI;
-   HI  = -42.38L;
-   HI +=  2.049L * T;
-   HI +=  10.14L * R;
-   HI += -0.2248L * T * R;
-   HI += -0.006838L * TT;
-   HI += -0.05482L * RR;
-   HI +=  0.001228L * TT * R;
-   HI +=  0.0008528L * RR * T;
-   HI += -0.00000199L * TT * RR;
+   float HI;
+   HI  = -42.38;
+   HI +=  2.049 * T;
+   HI +=  10.14 * R;
+   HI += -0.2248 * T * R;
+   HI += -0.006838 * TT;
+   HI += -0.05482 * RR;
+   HI +=  0.001228 * TT * R;
+   HI +=  0.0008528 * RR * T;
+   HI += -0.00000199 * TT * RR;
    return ((HI - 32.0) / 1.8);
 }
 
 //Dewpoint in DegC
-int32_t BME280dewPoint (float T, float R) {
+float BME280dewPoint (float T, float R) {
   float b = 17.271;
   float c = 237.7;
   T = ((b*T) / (c+T)) + log(R*0.01);
