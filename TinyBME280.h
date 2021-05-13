@@ -6,7 +6,7 @@
 
 #include <stdint.h>
 #include <Arduino.h>
-#include <Wire.h>
+#include <SoftWire.h>
 
 #ifndef TINYBME280
 #define TINYBME280
