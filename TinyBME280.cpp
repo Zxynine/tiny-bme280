@@ -4,11 +4,23 @@
    http://creativecommons.org/licenses/by/4.0/
 */
 #include "TinyBME280.h"
+#if !defined(SDA_PIN) && !defined(SCL_PIN) 
+#define I2C_TIMEOUT 1000
+#define I2C_PULLUP 1
+//SDA pin is connected on D (ATtiny Pin 6) (PB1)
+#define SDA_PORT PORTB
+#define SDA_PIN 1
+//SCL pin is connected on D6 (ATtiny Pin 3) (PB4)
+#define SCL_PORT PORTB
+#define SCL_PIN 4
+#endif
+#include <SoftWire.h>
+SoftWire Wire = SoftWire();
 
 int16_t T[4], P[10], H[7];
 int32_t BME280t_fine;
 
-int BME280address = 118;
+int BME280address = 0x76;
 
 int16_t read16 () {
   uint8_t lo, hi;
