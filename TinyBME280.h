@@ -1,7 +1,4 @@
-/* TinyBME280 Library v2
-
-   David Johnson-Davies - www.technoblogy.com - 22nd June 2019
-   
+/* TinyBME280 Library expanded
    CC BY 4.0
    Licensed under a Creative Commons Attribution 4.0 International license: 
    http://creativecommons.org/licenses/by/4.0/
