@@ -26,19 +26,14 @@ The library provides the following routines:
 
 **BME280setup()** - sets up the BME280 into its normal measurement mode, with no upsampling, and reads the fixed calibrations from the sensor. You should call this in setup().
 
-**BME280temperature()** - gives the temperature as a signed 32-bit integer in °C with a resolution of 0.01°C. So an output value of “5123” equals 51.23°C.
+**BME280temperature()** - gives the temperature as a signed 32-bit integer in °C with a resolution of 0.01°C, so an output value of “5123” equals 51.23°C.
 
 **BME280pressure()** - gives the pressure in Pa as an unsigned 32-bit integer, so an output value of “96386” equals 96386 Pa, or 963.86 hPa.
 
 **BME280humidity()** - gives the humidity in %RH with a resolution of 0.01%RH, so an output value of “4653” represents 46.53 %RH.
 
-#### Altitude
+**BME280altitude(referencePressure)** - gives the altitude in metres as a float where **referencePressure** is the pressure in Pa at zero altitude; for example, 102470.0.
 
-To add altitude use this routine:
+**BME280heatIndex(referenceTemperature, referenceHumidity)** - gives the apparent temperature (Heat index) in °C as a float, so an output value of “23.6" equals 23.6°C where **referenceTemperature** and **referenceHumidity** are floats of the values with the decimal in the proper location; for example, 51.23°C and 46.53 %RH.
 
-    // Altitude in metres
-    float BME280altitude (float referencePressure) {
-      return ((float)-45846.2)*(pow(((float)BME280pressure()/(float)referencePressure), 0.190263) - (float)1);
-    }
-
-where **referencePressure** is the pressure in Pa at zero altitude; for example, 101325.0.
+**BME280dewPoint(referenceTemperature, referenceHumidity)** - gives the dew point in °C as a float, so an output value of “23.6" equals 23.6°C where **referenceTemperature** and **referenceHumidity** are floats of the values with the decimal in the proper location; for example, 51.23°C and 46.53 %RH.
